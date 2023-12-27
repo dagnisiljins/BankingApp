@@ -46,18 +46,14 @@
                             </tr>
                         @endforeach
                         </tbody>
-                    </table>
+                    </table><br>
+                    <div class="mt-4 text-right mb-4">
+                        <a href="{{ route('my-accounts.create') }}" class="create-investment-btn">
+                            New Account
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Fixed Button -->
-    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
-        <a href="{{ route('my-accounts.create') }}" style="background-color: blue; color: white; padding: 15px; border-radius: 50%; text-align: center; display: flex; justify-content: center; align-items: center; width: 50px; height: 50px; text-decoration: none; transition: background-color 0.3s;">
-            <svg xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-            </svg>
-        </a>
     </div>
 </x-app-layout>
