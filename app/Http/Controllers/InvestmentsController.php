@@ -53,6 +53,42 @@ class InvestmentsController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'crypto_symbol' => 'required',
+            'quantity' => 'required|integer',
+        ]);
+
+        $cryptoRate = Crypto::where('crypto_symbol', $request->crypto_symbol)->first();
+        if (!$cryptoRate) {
+            return back()->withErrors(['msg' => 'Crypto rate not found']);
+        }
+
+        $currentRate = $cryptoRate->EUR;
+        $amount = $request->quantity * $currentRate;
+
+        $investmentAccount = InvestmentsAccounts::where('user_id', auth()->id())->first();
+        if (!$investmentAccount) {
+            return back()->withErrors(['msg' => 'Investment account not found']);
+        }
+
+        if ($investmentAccount->balance < round($amount * 100)) {
+            return redirect()->route('investments')->with('error', 'You dont have enough funds to make this investment!');
+        }
+
+        $investmentAccount->balance -= round($amount * 100);
+        $investmentAccount->save();
+
+        $data = [
+            'user_id' => auth()->id(),
+            'crypto_symbol' => $request->crypto_symbol,
+            'quantity' => $request->quantity,
+            'purchase_rate' => $currentRate,
+            'status' => 'Active',
+        ];
+
+        Investments::create($data);
+
+
         return redirect()->route('investments')->with('success', 'You have a new investment!');
     }
 

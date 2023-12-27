@@ -25,11 +25,15 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <!-- Check for Success Message -->
+            <!-- Check for Message -->
             @if (session('success'))
                 <div class="mb-4 text-sm text-green-600">
                     {{ session('success') }}
                 </div>
+            @elseif (session('error'))
+                    <div class="mb-4 text-sm text-red-600">
+                        {{ session('error') }}
+                    </div>
             @endif
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
