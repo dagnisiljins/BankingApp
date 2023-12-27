@@ -38,7 +38,6 @@ Route::get('/investments', [InvestmentsController::class, 'view'])->middleware([
 Route::get('/investments/create', [InvestmentsController::class, 'create'])->middleware(['auth'])->name('investments.create');
 Route::post('/investments', [InvestmentsController::class, 'store'])->middleware(['auth'])->name('investments.store');
 Route::post('/investments/sell', [InvestmentsController::class, 'sell'])->middleware(['auth'])->name('investments.sell');
-
 Route::post('/investments/create-account', [InvestmentsAccountController::class, 'create'])->middleware(['auth'])->name('investments.create');
 
 require __DIR__.'/auth.php';

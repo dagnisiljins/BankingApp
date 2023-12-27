@@ -39,7 +39,7 @@
                         Investments
                     </h2>
 
-                    <table class="min-w-full divide-y divide-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200 mb-4">
                         <thead class="bg-gray-50">
                         <tr>
                             <th scope="col"
@@ -96,8 +96,16 @@
                             </tr>
                         @endforeach
                         </tbody>
-                    </table>
+
+                    </table><br>
+                    <div class="mt-4 text-right mb-4">
+                        <a href="{{ route('investments.create') }}" class="create-investment-btn">
+                            New Investment
+                        </a>
+                    </div>
+
                 </div>
+
             </div><br>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
