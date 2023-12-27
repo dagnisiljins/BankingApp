@@ -5,7 +5,7 @@
                 {{ __('Your investments accounts ') }} {{ $investmentAccount->account_no }} {{ __('balance is EUR ') }} {{ number_format($investmentAccount->balance / 100, 2) }}
             </h2>
         @else
-            <form action="{{ route('investments.create') }}" method="POST">
+            <form action="{{ route('investments.create-account') }}" method="POST">
                 @csrf
                 <button type="submit" style="background-color: #4CAF50; /* Green */
                             border: none;
@@ -38,6 +38,8 @@
                     <h2 class="text-lg leading-6 font-medium text-gray-900 mb-4">
                         Investments
                     </h2>
+
+                    @if(!$activeInvestments->isEmpty())
 
                     <table class="min-w-full divide-y divide-gray-200 mb-4">
                         <thead class="bg-gray-50">
@@ -98,11 +100,17 @@
                         </tbody>
 
                     </table><br>
+                    @else
+                        <p class="text-gray-600">No investments found.</p><br>
+                    @endif
+
+                    @if ($investmentAccount)
                     <div class="mt-4 text-right mb-4">
                         <a href="{{ route('investments.create') }}" class="create-investment-btn">
                             New Investment
                         </a>
                     </div>
+                    @endif
 
                 </div>
 
@@ -113,6 +121,8 @@
                     <h2 class="text-lg leading-6 font-medium text-gray-900 mb-4">
                         Investment history
                     </h2>
+
+                    @if(!$soldInvestments->isEmpty())
 
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -164,6 +174,9 @@
                         @endforeach
                         </tbody>
                     </table>
+                    @else
+                        <p class="text-gray-600">No investment history found.</p><br>
+                    @endif
                 </div>
             </div>
         </div>

@@ -1488,3 +1488,76 @@ select {
     color: white;
 }
 
+/* Custom Styles for investment form */
+.custom-table {
+    width: 70%;
+    border-collapse: collapse;
+}
+
+.custom-table th, .custom-table td {
+    text-align: left;
+    padding: 12px;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+    background-color: transparent;
+}
+
+select {
+    width: 200px;
+    padding: 8px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type="number"] {
+    width: 70px;
+    padding: 8px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.btn {
+    width: 150px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.increment-decrement-btn {
+    width: 30px;
+    background-color: #ddd;
+    border: none;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.increment-decrement-btn:hover {
+    background-color: #ccc;
+}
+
+.quantity-input {
+    width: 150px;
+    text-align: center;
+}
+

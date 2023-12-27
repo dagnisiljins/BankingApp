@@ -42,12 +42,18 @@ class InvestmentsController extends Controller
 
     public function create()
     {
-        return view('investments.create');//todo create view
+        if ( ! InvestmentsAccounts::where('user_id', auth()->id())->first()) {
+            return redirect()->route('investments')->with('success', 'You need to create investment account!');
+        }
+
+        $cryptoRates = Crypto::whereIn('crypto_symbol', ['BTC', 'ETH', 'LTC'])->get();
+
+        return view('investments.create', compact('cryptoRates'));
     }
 
     public function store(Request $request)
     {
-        //TODO add logic
+        return redirect()->route('investments')->with('success', 'You have a new investment!');
     }
 
     public function sell(Request $request)

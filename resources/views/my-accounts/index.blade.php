@@ -17,6 +17,8 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+
+                    @if(!$accounts->isEmpty())
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                         <tr>
@@ -47,6 +49,9 @@
                         @endforeach
                         </tbody>
                     </table><br>
+                    @else
+                        <p class="text-gray-600">Press New Account to create your first account.</p><br>
+                    @endif
                     <div class="mt-4 text-right mb-4">
                         <a href="{{ route('my-accounts.create') }}" class="create-investment-btn">
                             New Account
