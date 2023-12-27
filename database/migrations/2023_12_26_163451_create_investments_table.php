@@ -15,6 +15,8 @@ class CreateInvestmentsTable extends Migration
             $table->string('crypto_symbol');
             $table->integer('quantity');
             $table->decimal('purchase_rate', 10, 4);
+            $table->enum('status', ['Active', 'Sold']);
+            $table->bigInteger('sale_value')->default(0);
             $table->timestamps();
         });
     }

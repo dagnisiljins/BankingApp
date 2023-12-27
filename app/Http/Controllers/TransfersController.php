@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BankAccount;
+use App\Models\InvestmentsAccounts;
 use App\Models\Transfers;
 use App\Models\Currency;
 use Illuminate\Http\Request;
@@ -14,7 +15,9 @@ class TransfersController extends Controller
     public function view()
     {
         $accounts = BankAccount::where('user_id', auth()->id())->get();
-        return view('transfers.index', compact('accounts'));
+        $investmentAccounts = InvestmentsAccounts::where('user_id', auth()->id())->first();
+
+        return view('transfers.index', compact('accounts', 'investmentAccounts'));
     }
 
     public function create()
@@ -31,10 +34,19 @@ class TransfersController extends Controller
             'reference' => 'required'
         ]);
 
-        $senderAccount = BankAccount::findOrFail($request->senders_account);
-        $recipientAccount = BankAccount::findOrFail($request->recipient_account);
+        /*$senderAccount = BankAccount::findOrFail($request->senders_account);//or InvestmentsAccounts::findOrFail($request->senders_account)
+        $recipientAccount = BankAccount::findOrFail($request->recipient_account);//or InvestmentsAccounts::findOrFail($request->senders_account)*/
+
+        $senderAccount = BankAccount::where('account_no', $request->senders_account)->first()
+            ?? InvestmentsAccounts::where('account_no', $request->senders_account)->first();
+        $recipientAccount = BankAccount::where('account_no', $request->recipient_account)->first()
+            ?? InvestmentsAccounts::where('account_no', $request->recipient_account)->first();
+
         $transferAmount = $request->amount * 100; // Convert to cents
 
+        if (!$senderAccount || !$recipientAccount) {
+            return back()->withErrors(['msg' => 'One or both account numbers are invalid.']);
+        }
 
         if ($senderAccount->balance < $transferAmount) {
             return back()->withErrors(['msg' => 'Insufficient funds']);

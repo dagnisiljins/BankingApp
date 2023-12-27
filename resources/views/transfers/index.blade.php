@@ -43,6 +43,39 @@
                             </tr>
                         @endforeach
                         </tbody>
+                    </table><br>
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Investment Account No
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Balance
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Currency
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {{ $investmentAccounts->account_no }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {{ number_format($investmentAccounts->balance / 100, 2) }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {{ $investmentAccounts->currency }}
+                            </td>
+                            <!-- New Buttons -->
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="{{ route('transfers.create', ['from_account' => $investmentAccounts->account_no]) }}" class="text-indigo-600 hover:text-indigo-900">New Transfer</a>
+                                <a href="{{ route('transfers.history', ['account' => $investmentAccounts->account_no]) }}" class="text-indigo-600 hover:text-indigo-900 ml-4">Transfer History</a>
+                            </td>
+                        </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
