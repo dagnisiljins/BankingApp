@@ -84,7 +84,7 @@
 
                                 <!-- Sell Button -->
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <form action="{{ route('investments.sell', ['investment_ID' => $activeInvestment->id]) }}" method="POST">
+                                    <form action="{{ route('investments.sell', ['investment_ID' => $activeInvestment->id]) }}" method="POST" onsubmit="return confirmSell()">
                                         @csrf
                                         @method('POST')
                                         <button type="submit" class="text-indigo-600 hover:text-indigo-900">Sell</button>
@@ -177,3 +177,9 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function confirmSell() {
+        return confirm('Are you sure you want to sell this investment?');
+    }
+</script>
