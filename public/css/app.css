@@ -1472,7 +1472,7 @@ select {
 }
 
 .create-investment-btn {
-    background-color: #007bff; /* Blue color */
+    background-color: #007bff;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -1484,7 +1484,7 @@ select {
 }
 
 .create-investment-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
     color: white;
 }
 
@@ -1539,10 +1539,12 @@ input[type="number"] {
 
 .increment-decrement-btn {
     width: 30px;
+    height: 30px;
     background-color: #ddd;
     border: none;
     color: black;
     padding: 10px;
+    line-height: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
