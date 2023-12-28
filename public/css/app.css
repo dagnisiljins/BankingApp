@@ -1563,3 +1563,6 @@ input[type="number"] {
     text-align: center;
 }
 
+.welcome-logo {
+    width: 150px;
+}

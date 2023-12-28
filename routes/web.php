@@ -40,4 +40,4 @@ Route::post('/investments', [InvestmentsController::class, 'store'])->middleware
 Route::post('/investments/sell', [InvestmentsController::class, 'sell'])->middleware(['auth'])->name('investments.sell');
 Route::post('/investments/create-account', [InvestmentsAccountController::class, 'create'])->middleware(['auth'])->name('investments.create-account');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

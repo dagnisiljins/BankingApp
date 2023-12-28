@@ -42,7 +42,7 @@ class InvestmentsController extends Controller
 
     public function create()
     {
-        if ( ! InvestmentsAccounts::where('user_id', auth()->id())->first()) {
+        if (!InvestmentsAccounts::where('user_id', auth()->id())->first()) {
             return redirect()->route('investments')->with('success', 'You need to create investment account!');
         }
 

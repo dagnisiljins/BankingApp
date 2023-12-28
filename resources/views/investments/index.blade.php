@@ -7,16 +7,7 @@
         @else
             <form action="{{ route('investments.create-account') }}" method="POST">
                 @csrf
-                <button type="submit" style="background-color: #4CAF50; /* Green */
-                            border: none;
-                            color: white;
-                            padding: 15px 32px;
-                            text-align: center;
-                            text-decoration: none;
-                            display: inline-block;
-                            font-size: 16px;
-                            margin: 4px 2px;
-                            cursor: pointer;">
+                <button type="submit" class="create-investment-btn">
                     {{ __('Create Investment Account') }}
                 </button>
             </form>

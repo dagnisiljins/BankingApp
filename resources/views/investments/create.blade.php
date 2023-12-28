@@ -110,4 +110,5 @@
         // Initial total calculation
         updateTotal();
     });
+
 </script>

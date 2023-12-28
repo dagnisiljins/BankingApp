@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="flex justify-end mt-4">
-                            <button type="submit" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                            <button type="submit" class="create-investment-btn">
                                 Make Payment
                             </button>
                         </div>
