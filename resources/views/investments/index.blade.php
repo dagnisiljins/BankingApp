@@ -86,7 +86,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <form action="{{ route('investments.sell', ['investment_ID' => $activeInvestment->id]) }}" method="POST" onsubmit="return confirmSell()">
                                         @csrf
-                                        @method('POST')
+                                        @method('PUT')
                                         <button type="submit" class="text-indigo-600 hover:text-indigo-900">Sell</button>
                                     </form>
                                 </td>
