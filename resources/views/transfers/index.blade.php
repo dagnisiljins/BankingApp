@@ -43,7 +43,7 @@
                                 </td>
                                 <!-- New Buttons -->
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{{ route('transfers.create', ['from_account' => $account->account_no]) }}" class="text-indigo-600 hover:text-indigo-900">New Transfer</a>
+                                    <a href="{{ route('transfers.create', ['from_account' => $account->account_no, 'balance' => $account->balance, 'currency' => $account->currency]) }}" class="text-indigo-600 hover:text-indigo-900">New Transfer</a>
                                     <a href="{{ route('transfers.history', ['account' => $account->account_no]) }}" class="text-indigo-600 hover:text-indigo-900 ml-4">Transfer History</a>
                                 </td>
                             </tr>

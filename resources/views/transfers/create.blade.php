@@ -32,6 +32,7 @@
                         <div class="mb-4">
                             <label for="senders_account" class="block text-sm font-medium text-gray-700">Sender's account No</label>
                             <input type="text" id="senders_account" name="senders_account" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" value="{{ request()->query('from_account') }}" readonly>
+                            <p class="block text-sm font-medium text-gray-500">Available amount: {{ number_format(request()->query('balance') / 100, 2)}} {{ request()->query('currency') }}</p>
                         </div>
 
                         <!-- Recipient Account Number -->
