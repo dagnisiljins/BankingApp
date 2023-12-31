@@ -5,6 +5,7 @@
                 {{ __('Your investments accounts ') }} {{ $investmentAccount->account_no }} {{ __('balance is EUR ') }} {{ number_format($investmentAccount->balance / 100, 2) }}
             </h2>
         @else
+            <p class="text-gray-600">Create your investment account to start investing!</p><br>
             <form action="{{ route('investments.create-account') }}" method="POST">
                 @csrf
                 <button type="submit" class="create-investment-btn">

@@ -52,6 +52,11 @@
                     </table>
                     @else
                         <p class="text-gray-600">No accounts found.</p>
+                        <div class="mt-4 text-right mb-4">
+                            <a href="{{ route('my-accounts.create') }}" class="create-investment-btn">
+                                Create Account
+                            </a>
+                        </div>
                     @endif
                 </div>
             </div><br>
