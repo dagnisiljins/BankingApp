@@ -34,13 +34,14 @@ class FetchCurrencyCommand extends Command
                 continue;
             }
 
-            $currency = Currency::updateOrCreate([
+            Currency::updateOrCreate([
                 'symbol' => $symbol,
             ], [
                 'rate' => $rate,
             ]);
         }
 
+        $this->info('Currency rates updated successfully.');
         return 0;
     }
 }

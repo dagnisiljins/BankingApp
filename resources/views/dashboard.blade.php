@@ -17,12 +17,11 @@
 
             <!-- Welcome toast -->
 
-
             <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive"
                  aria-atomic="true" id="myToast">
                 <div class="d-flex">
                     <div class="toast-body">
-                        Hello, {{ Auth::user()->name }}! Welcome to payment service app!
+                        Hello, {{ Auth::user()->name }}! Explore our services!
                     </div>
                     <button type="button" class="btn-close btn-close-white me-2 m-auto" style="color: black;"
                             data-bs-dismiss="toast" aria-label="Close"></button>
