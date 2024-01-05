@@ -6,31 +6,32 @@ use App\Models\BankAccount;
 use App\Models\InvestmentsAccounts;
 use App\Models\Transfers;
 use App\Models\Currency;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 class TransfersController extends Controller
 {
-    public function view()
+    public function view(): Response
     {
         $accounts = BankAccount::where('user_id', auth()->id())->get();
         $investmentAccounts = InvestmentsAccounts::where('user_id', auth()->id())->first();
 
-        return view('transfers.index', compact('accounts', 'investmentAccounts'));
+        return response()->view('transfers.index', compact('accounts', 'investmentAccounts'));
     }
 
-    public function create()
+    public function create(): Response
     {
-        return view('transfers.create');
+        return response()->view('transfers.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'senders_account' => 'required',
             'recipient_account' => 'required',
-            'amount' => 'required|numeric|min:0.01', // Ensure amount is numeric and at least 0.01
+            'amount' => 'required|numeric|min:0.01',
             'reference' => 'required'
         ]);
 
@@ -58,11 +59,9 @@ class TransfersController extends Controller
 
 
             if ($senderAccount->currency != $recipientAccount->currency) {
-                // Get exchange rates
                 $senderRate = $senderAccount->currency == 'EUR' ? 1 : Currency::where('symbol', $senderAccount->currency)->first()->rate;
                 $recipientRate = $recipientAccount->currency == 'EUR' ? 1 : Currency::where('symbol', $recipientAccount->currency)->first()->rate;
 
-                // Convert sender currency to EUR (if needed), then to recipient currency
                 $transferAmountInEUR = $transferAmount / $senderRate;
                 $transferAmount = $transferAmountInEUR * $recipientRate;
             }
@@ -70,8 +69,7 @@ class TransfersController extends Controller
             $recipientAccount->balance += $transferAmount;
             $recipientAccount->save();
 
-            // Record the transaction
-            $initialTransferAmount = $request->amount * 100; //To track initial amount
+            $initialTransferAmount = $request->amount * 100;
 
             Transfers::create([
                 'from_account' => $senderAccount->account_no,
@@ -84,10 +82,10 @@ class TransfersController extends Controller
             ]);
         });
 
-        return redirect()->route('dashboard')->with('success', 'Transfer completed successfully');
+        return redirect()->route('transfers')->with('success', 'Transfer completed successfully');
     }
 
-    public function history(Request $request)
+    public function history(Request $request): Response
     {
         $accountNo = $request->query('account');
         $transfers = Transfers::where('from_account', $accountNo)
@@ -101,7 +99,7 @@ class TransfersController extends Controller
         $totalReceived = Transfers::where('to_account', $accountNo)
             ->sum('received_amount');
 
-        return view('transfers.history',
+        return response()->view('transfers.history',
             compact('transfers', 'totalSent', 'totalReceived', 'accountNo'));
     }
 

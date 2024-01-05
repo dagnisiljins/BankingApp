@@ -5,25 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\BankAccount;
 use App\Models\Investments;
 use App\Models\InvestmentsAccounts;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BankAccountController extends Controller
 {
 
-    public function view()
+    public function view(): Response
     {
         $accounts = BankAccount::where('user_id', auth()->id())->get();
         $investmentAccounts = InvestmentsAccounts::where('user_id', auth()->id())->get();
 
-        return view('my-accounts.index', compact('accounts', 'investmentAccounts'));
+        return response()->view('my-accounts.index', compact('accounts', 'investmentAccounts'));
     }
 
-    public function create()
+    public function create(): Response
     {
-        return view('my-accounts.create');
+        return response()->view('my-accounts.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'currency' => 'required|in:EUR,GBP,USD',
@@ -38,7 +40,7 @@ class BankAccountController extends Controller
         return redirect()->route('my-accounts')->with('success', 'New account created!');
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request): RedirectResponse
     {
         $account = BankAccount::where('account_no', $request->account_no)->first()
             ?? InvestmentsAccounts::where('account_no', $request->account_no)->first();

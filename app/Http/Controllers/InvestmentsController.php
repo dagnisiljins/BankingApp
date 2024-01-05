@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Crypto;
 use App\Models\Investments;
 use App\Models\InvestmentsAccounts;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class InvestmentsController extends Controller
 {
-    public function view()
+    public function view(): Response
     {
         $investmentAccount = InvestmentsAccounts::where('user_id', auth()->id())->first();
 
@@ -37,21 +39,22 @@ class InvestmentsController extends Controller
         }
 
 
-        return view('investments.index', compact('activeInvestments', 'soldInvestments', 'investmentAccount'));
+        return response()->view('investments.index', compact('activeInvestments', 'soldInvestments', 'investmentAccount'));
     }
 
     public function create()
     {
         if (!InvestmentsAccounts::where('user_id', auth()->id())->first()) {
-            return redirect()->route('investments')->with('success', 'You need to create investment account!');
+
+            return redirect()->route('investments')->with('error', 'You need to create investment account!');
         }
 
         $cryptoRates = Crypto::whereIn('crypto_symbol', ['BTC', 'ETH', 'LTC'])->get();
 
-        return view('investments.create', compact('cryptoRates'));
+        return response()->view('investments.create', compact('cryptoRates'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'crypto_symbol' => 'required',
@@ -92,7 +95,7 @@ class InvestmentsController extends Controller
         return redirect()->route('investments')->with('success', 'You have a new investment!');
     }
 
-    public function sell(Request $request)
+    public function sell(Request $request): RedirectResponse
     {
         $request->validate([
             'investment_ID' => 'required|integer',
