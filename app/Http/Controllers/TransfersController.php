@@ -35,8 +35,6 @@ class TransfersController extends Controller
             'reference' => 'required'
         ]);
 
-        /*$senderAccount = BankAccount::findOrFail($request->senders_account);//or InvestmentsAccounts::findOrFail($request->senders_account)
-        $recipientAccount = BankAccount::findOrFail($request->recipient_account);//or InvestmentsAccounts::findOrFail($request->senders_account)*/
 
         $senderAccount = BankAccount::where('account_no', $request->senders_account)->first()
             ?? InvestmentsAccounts::where('account_no', $request->senders_account)->first();
