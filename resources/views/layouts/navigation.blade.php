@@ -82,6 +82,15 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('my-accounts')" :active="request()->routeIs('my-accounts')">
+                {{ __('My Accounts') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('transfers')" :active="request()->routeIs('transfers')">
+                {{ __('Transfers') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('investments')" :active="request()->routeIs('investments')">
+                {{ __('Investments') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
